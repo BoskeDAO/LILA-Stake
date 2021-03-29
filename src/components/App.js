@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Web3 from "web3"
-import DappToken from "../abis/DappToken.json"
+import LERNToken from "../abis/LERNToken.json"
 import TokenFarm from "../abis/TokenFarm.json"
 import ERC20 from "../abis/ERC20.json"
 import Navbar from "./Navbar"
@@ -50,7 +50,8 @@ class App extends Component {
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
     this.setState({
-      tokenAddress: "0xa36085F69e2889c224210F603D836748e7dC0088",
+      // LINK token address rinkeby
+      tokenAddress: "0x01BE23585060835E02B77ef475b0Cc51aA1e0709",
     })
     this.setState({ image: chainlink })
     this.setState({ tokenName: "LINK" })
@@ -64,21 +65,21 @@ class App extends Component {
     let erc20Balance = await erc20.methods.balanceOf(this.state.account).call()
     this.setState({ erc20Balance: erc20Balance.toString() })
 
-    // Load DappToken
-    const dappTokenData = DappToken.networks[networkId]
-    if (dappTokenData) {
-      const dappToken = new web3.eth.Contract(
-        DappToken.abi,
-        dappTokenData.address
+    // Load LERNToken
+    const lernTokenData = LERNToken.networks[networkId]
+    if (lernTokenData) {
+      const lernToken = new web3.eth.Contract(
+        LERNToken.abi,
+        lernTokenData.address
       )
-      this.setState({ dappTokenAddress: dappTokenData.address })
-      this.setState({ dappToken })
-      let dappTokenBalance = await dappToken.methods
+      this.setState({ lernTokenAddress: lernTokenData.address })
+      this.setState({ lernToken })
+      let lernTokenBalance = await lernToken.methods
         .balanceOf(this.state.account)
         .call()
-      this.setState({ dappTokenBalance: dappTokenBalance.toString() })
+      this.setState({ lernTokenBalance: lernTokenBalance.toString() })
     } else {
-      window.alert("DappToken contract not deployed to detected network.")
+      window.alert("LERNToken contract not deployed to detected network.")
     }
 
     // Load TokenFarm
@@ -140,11 +141,11 @@ class App extends Component {
     this.state = {
       account: "0x0",
       erc20: {},
-      dappToken: {},
-      dappTokenAddress: "",
+      lernToken: {},
+      lernTokenAddress: "",
       tokenFarm: {},
       erc20Balance: "0",
-      dappTokenBalance: "0",
+      lernTokenBalance: "0",
       stakingBalance: "0",
       loading: true,
       image: chainlink,
@@ -164,8 +165,8 @@ class App extends Component {
       content = (
         <Main
           erc20Balance={this.state.erc20Balance}
-          dappTokenBalance={this.state.dappTokenBalance}
-          dappTokenAddress={this.state.dappTokenAddress}
+          lernTokenBalance={this.state.lernTokenBalance}
+          lernTokenAddress={this.state.lernTokenAddress}
           stakingBalance={this.state.stakingBalance}
           stakeTokens={this.stakeTokens.bind(this)}
           unstakeTokens={this.unstakeTokens.bind(this)}

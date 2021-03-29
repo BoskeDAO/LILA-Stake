@@ -1,6 +1,7 @@
 require('babel-register')
 require('babel-polyfill')
 const HDWalletProvider = require('@truffle/hdwallet-provider')
+require('dotenv').config()
 
 module.exports = {
   networks: {
@@ -9,9 +10,9 @@ module.exports = {
       port: 7545,
       network_id: "*" // Match any network id
     },
-    live: {
+    rinkeby: {
       provider: () => {
-        return new HDWalletProvider(process.env.MNEMONIC, process.env.KOVAN_RPC_URL)
+        return new HDWalletProvider(process.env.MNEMONIC, process.env.RINKEBY_RPC_URL)
       },
       network_id: '*',
       // ~~Necessary due to https://github.com/trufflesuite/truffle/issues/1971~~

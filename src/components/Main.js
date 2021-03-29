@@ -22,10 +22,10 @@ class Main extends Component {
               </td>
               <td>
                 {window.web3.utils.fromWei(
-                  this.props.dappTokenBalance,
+                  this.props.lernTokenBalance,
                   "Ether"
                 )}{" "}
-                DAPP
+                LERN
               </td>
             </tr>
           </tbody>
@@ -102,17 +102,17 @@ class Main extends Component {
                       //this.props.updateBalance(this.props.tokenAddress);
                     }}
                   />
-                  <label for="dapptoken"> &nbsp;&nbsp;&nbsp; &nbsp;</label>
+                  <label for="lerntoken"> &nbsp;&nbsp;&nbsp; &nbsp;</label>
                   <input
                     type="button"
-                    id="dapptoken"
+                    id="lerntoken"
                     name="token"
-                    value="dapptoken"
+                    value="lerntoken"
                     onClick={(event) => {
                       event.preventDefault();
                       this.props.changeToken(
-                        this.props.dappTokenAddress,
-                        "DAPP",
+                        this.props.lernTokenAddress,
+                        "LERN",
                         dappImage
                       );
                       //this.props.updateBalance(this.props.tokenAddress);

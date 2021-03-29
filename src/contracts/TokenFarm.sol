@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract TokenFarm is ChainlinkClient, Ownable {
-    string public name = "Dapp Token Farm";
-    IERC20 public dappToken;
+    string public name = "LERN Token Farm";
+    IERC20 public lernToken;
 
     address[] public stakers;
     // token > address
@@ -16,8 +16,8 @@ contract TokenFarm is ChainlinkClient, Ownable {
     mapping(address => address) public tokenPriceFeedMapping;
     address[] allowedTokens;
 
-    constructor(address _dappTokenAddress) public {
-        dappToken = IERC20(_dappTokenAddress);
+    constructor(address _lernTokenAddress) public {
+        lernToken = IERC20(_lernTokenAddress);
     }
 
     function addAllowedTokens(address token) public onlyOwner {
@@ -115,7 +115,7 @@ contract TokenFarm is ChainlinkClient, Ownable {
             stakersIndex++
         ) {
             address recipient = stakers[stakersIndex];
-            dappToken.transfer(recipient, getUserTotalValue(recipient));
+            lernToken.transfer(recipient, getUserTotalValue(recipient));
         }
     }
 
